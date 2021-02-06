@@ -11,6 +11,7 @@ import com.example.demo.util.Util;
 
 @Service
 public class ArticleService {
+	
 	private int articlesLastId;
 	private List<Article> articles;
 
