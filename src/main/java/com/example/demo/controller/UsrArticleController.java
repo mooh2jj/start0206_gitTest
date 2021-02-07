@@ -30,8 +30,16 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/list")
 	@ResponseBody
-	public List<Article> showList() {
-		return articleService.getArticles();
+	public List<Article> showList(String serachKeyword) {
+		System.out.println("serachKeyword : "+ serachKeyword);
+		
+		if( serachKeyword != null && serachKeyword.length() == 0) {
+			serachKeyword = null;
+		}
+		if( serachKeyword != null ) {
+			serachKeyword = serachKeyword.trim();
+		}
+		return articleService.getArticles(serachKeyword);
 	}
 	
 	@RequestMapping("/usr/article/doAdd")
