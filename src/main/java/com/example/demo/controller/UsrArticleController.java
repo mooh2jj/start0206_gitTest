@@ -30,8 +30,16 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/list")
 	@ResponseBody
-	public List<Article> showList(String serachKeyword) {
+	public List<Article> showList(String serachKeywordType, String serachKeyword) {
 		System.out.println("serachKeyword : "+ serachKeyword);
+		
+		if( serachKeywordType != null ) {
+			serachKeywordType = serachKeywordType.trim();
+		}
+		
+		if( serachKeywordType == null || serachKeywordType.length() == 0 ) {
+			serachKeywordType = "titleAndBody";
+		}
 		
 		if( serachKeyword != null && serachKeyword.length() == 0) {
 			serachKeyword = null;
@@ -39,7 +47,7 @@ public class UsrArticleController {
 		if( serachKeyword != null ) {
 			serachKeyword = serachKeyword.trim();
 		}
-		return articleService.getArticles(serachKeyword);
+		return articleService.getArticles(serachKeywordType, serachKeyword);
 	}
 	
 	@RequestMapping("/usr/article/doAdd")

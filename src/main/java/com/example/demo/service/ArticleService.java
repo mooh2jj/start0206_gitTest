@@ -21,8 +21,8 @@ public class ArticleService {
 		articles = new ArrayList<>();
 
 		// 게시물 2개 생성
-		articles.add(new Article(++articlesLastId, "2020-12-12 12:12:12", "2020-12-12 12:12:12", "제목1", "내용1"));
-		articles.add(new Article(++articlesLastId, "2020-12-12 12:12:12", "2020-12-12 12:12:12", "제목2", "내용2"));
+		articles.add(new Article(++articlesLastId, "2020-12-12 12:12:12", "2020-12-12 12:12:12", "제목1 입니다.", "내용1 입니다."));
+		articles.add(new Article(++articlesLastId, "2020-12-12 12:12:12", "2020-12-12 12:12:12", "제목2 입니다.", "내용2 입니다."));
 	}
 
 	public Article getArticle(int id) {
@@ -35,7 +35,7 @@ public class ArticleService {
 		return null;
 	}
 
-	public List<Article> getArticles(String serachKeyword) {
+	public List<Article> getArticles( String serachKeywordType, String serachKeyword ) {
 		
 		if( serachKeyword == null) {
 			return articles;
@@ -44,7 +44,24 @@ public class ArticleService {
 		List<Article> filtered = new ArrayList<>();
 		
 		for( Article article : articles ) {
-			if( article.getTitle().contains(serachKeyword)) {
+			
+			boolean contains = false;
+			
+			if( serachKeywordType.equals("title") ) {
+				contains = article.getTitle().contains(serachKeyword);
+			}
+			else if( serachKeywordType.equals("body") ) {
+				contains = article.getBody().contains(serachKeyword);
+			}
+			else {
+				contains = article.getTitle().contains(serachKeyword);
+				
+				if( contains == false ) {
+					contains = article.getBody().contains(serachKeyword);
+				}
+			}
+			
+			if( contains ) {
 				filtered.add(article);
 			}
 		}
