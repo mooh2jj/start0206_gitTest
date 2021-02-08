@@ -62,7 +62,7 @@ public class UsrArticleController {
 			return new ResultData("F-1", "body를 입력해주세요.");
 		}
 		
-		return articleService.add(title, body);
+		return articleService.addArticle(title, body);
 	}
 	
 	
@@ -102,6 +102,6 @@ public class UsrArticleController {
 		
 		Article article = articleService.getArticle(id);
 		
-		return articleService.modify(id, title, body);
+		return articleService.modifyArticle(id, title, body);
 	}
 }
